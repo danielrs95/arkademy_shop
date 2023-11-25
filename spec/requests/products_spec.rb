@@ -78,7 +78,7 @@ RSpec.describe Product, type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post products_url, params: { product: invalid_attributes }
-        expect(response).to eq(422)
+        expect(response).to have_http_status(422)
       end
     end
   end
