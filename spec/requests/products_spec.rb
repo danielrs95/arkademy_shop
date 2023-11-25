@@ -12,21 +12,16 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/products', type: :request do
+RSpec.describe Product, type: :request do
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
 
-  context 'when data is provided' do
-    it 'creates a Product instance in the database' do
-    end
-  end
-
   let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+    { name: 'Sneakers', price: 49.99, quantity: 4 }
   end
 
   let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
+    { name: '' }
   end
 
   describe 'GET /index' do
@@ -60,7 +55,7 @@ RSpec.describe '/products', type: :request do
     end
   end
 
-  describe 'POST /create' do
+  describe 'POST /create', :focus do
     context 'with valid parameters' do
       it 'creates a new Product' do
         expect do
@@ -83,7 +78,7 @@ RSpec.describe '/products', type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post products_url, params: { product: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to eq(422)
       end
     end
   end

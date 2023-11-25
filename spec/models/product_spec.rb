@@ -1,5 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when data is provided' do
+    let(:params) { { name: 'Sneakers', price: 49.99, quantity: 4 } }
+
+    it 'saves the instance' do
+      expect(described_class.new(params).save!).to eq true
+    end
+
+    it {
+      expect do
+        described_class.new(params).save!
+      end.to change { Product.all.size }.by(1)
+    }
+  end
 end
