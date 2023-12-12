@@ -19,7 +19,7 @@ module Admin
 
     # GET /products/1/edit
     def edit
-      render :form, locals: { product: product, method: :put, url: admin_product_path(product) }
+      render :form, locals: { product:, method: :put, url: admin_product_path(product) }
     end
 
     # POST /products
@@ -30,7 +30,10 @@ module Admin
         if @product.save
           format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully created.' }
         else
-          format.html { render :form, locals: { product: @product, url: admin_products_path, method: :post } }
+          format.html do
+            render :form, status: :unprocessable_entity, notice: 'Error',
+                          locals: { product: @product, url: admin_products_path, method: :post }
+          end
         end
       end
     end
@@ -42,7 +45,10 @@ module Admin
         if @product.update(product_params)
           format.html { redirect_to admin_product_path(@product), notice: 'Product was successfully updated.' }
         else
-          format.html { render :form, locals: { product: product, method: :put, url: admin_product_path(product) } }
+          format.html do
+            render :form, status: :unprocessable_entity,
+                          locals: { product:, method: :put, url: admin_product_path(product) }
+          end
         end
       end
     end

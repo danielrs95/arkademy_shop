@@ -48,9 +48,16 @@ gem 'devise'
 gem 'webpacker'
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # Gemas existentes
   gem 'debug', platforms: %i[mri windows]
   gem 'rspec-rails', '~> 4.0.1'
+
+  # Añadir Byebug para debugging
+  gem 'byebug', platforms: [:mri]
+
+  # O puedes usar Pry, que es otro depurador muy popular
+  gem 'pry'
+  gem 'pry-rails' # para integración con Rails
 end
 
 group :development do
